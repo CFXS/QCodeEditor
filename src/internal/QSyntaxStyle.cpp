@@ -6,98 +6,63 @@
 #include <QXmlStreamReader>
 #include <QFile>
 
-QSyntaxStyle::QSyntaxStyle(QObject* parent) :
-    QObject(parent),
-    m_name(),
-    m_data(),
-    m_loaded(false)
-{
-
+QSyntaxStyle::QSyntaxStyle(QObject* parent) : QObject(parent), m_name(), m_data(), m_loaded(false) {
 }
 
-bool QSyntaxStyle::load(QString fl)
-{
+bool QSyntaxStyle::load(QString fl) {
     QXmlStreamReader reader(fl);
 
-    while (!reader.atEnd() && !reader.hasError())
-    {
+    while (!reader.atEnd() && !reader.hasError()) {
         auto token = reader.readNext();
 
-        if(token == QXmlStreamReader::StartElement)
-        {
-            if (reader.name() == "style-scheme")
-            {
-                if (reader.attributes().hasAttribute("name"))
-                {
+        if (token == QXmlStreamReader::StartElement) {
+            if (reader.name() == QStringLiteral("style-scheme")) {
+                if (reader.attributes().hasAttribute("name")) {
                     m_name = reader.attributes().value("name").toString();
                 }
-            }
-            else if (reader.name() == "style")
-            {
+            } else if (reader.name() == QStringLiteral("style")) {
                 auto attributes = reader.attributes();
 
                 auto name = attributes.value("name");
 
                 QTextCharFormat format;
 
-                if (attributes.hasAttribute("background"))
-                {
+                if (attributes.hasAttribute("background")) {
                     format.setBackground(QColor(attributes.value("background").toString()));
                 }
 
-                if (attributes.hasAttribute("foreground"))
-                {
+                if (attributes.hasAttribute("foreground")) {
                     format.setForeground(QColor(attributes.value("foreground").toString()));
                 }
 
-                if (attributes.hasAttribute("bold") &&
-                    attributes.value("bold") == "true")
-                {
+                if (attributes.hasAttribute("bold") && attributes.value("bold") == QStringLiteral("true")) {
                     format.setFontWeight(QFont::Weight::Bold);
                 }
 
-                if (attributes.hasAttribute("italic") &&
-                    attributes.value("italic") == "true")
-                {
+                if (attributes.hasAttribute("italic") && attributes.value("italic") == QStringLiteral("true")) {
                     format.setFontItalic(true);
                 }
 
-                if (attributes.hasAttribute("underlineStyle"))
-                {
+                if (attributes.hasAttribute("underlineStyle")) {
                     auto underline = attributes.value("underlineStyle");
 
                     auto s = QTextCharFormat::UnderlineStyle::NoUnderline;
 
-                    if (underline == "SingleUnderline")
-                    {
+                    if (underline == QStringLiteral("SingleUnderline")) {
                         s = QTextCharFormat::UnderlineStyle::SingleUnderline;
-                    }
-                    else if (underline == "DashUnderline")
-                    {
+                    } else if (underline == QStringLiteral("DashUnderline")) {
                         s = QTextCharFormat::UnderlineStyle::DashUnderline;
-                    }
-                    else if (underline == "DotLine")
-                    {
+                    } else if (underline == QStringLiteral("DotLine")) {
                         s = QTextCharFormat::UnderlineStyle::DotLine;
-                    }
-                    else if (underline == "DashDotLine")
-                    {
+                    } else if (underline == QStringLiteral("DashDotLine")) {
                         s = QTextCharFormat::DashDotLine;
-                    }
-                    else if (underline == "DashDotDotLine")
-                    {
+                    } else if (underline == QStringLiteral("DashDotDotLine")) {
                         s = QTextCharFormat::DashDotDotLine;
-                    }
-                    else if (underline == "WaveUnderline")
-                    {
+                    } else if (underline == QStringLiteral("WaveUnderline")) {
                         s = QTextCharFormat::WaveUnderline;
-                    }
-                    else if (underline == "SpellCheckUnderline")
-                    {
+                    } else if (underline == QStringLiteral("SpellCheckUnderline")) {
                         s = QTextCharFormat::SpellCheckUnderline;
-                    }
-                    else
-                    {
+                    } else {
                         qDebug() << "Unknown underline value " << underline;
                     }
 
@@ -114,44 +79,36 @@ bool QSyntaxStyle::load(QString fl)
     return m_loaded;
 }
 
-QString QSyntaxStyle::name() const
-{
+QString QSyntaxStyle::name() const {
     return m_name;
 }
 
-QTextCharFormat QSyntaxStyle::getFormat(QString name) const
-{
+QTextCharFormat QSyntaxStyle::getFormat(QString name) const {
     auto result = m_data.find(name);
 
-    if (result == m_data.end())
-    {
+    if (result == m_data.end()) {
         return QTextCharFormat();
     }
 
     return result.value();
 }
 
-bool QSyntaxStyle::isLoaded() const
-{
+bool QSyntaxStyle::isLoaded() const {
     return m_loaded;
 }
 
-QSyntaxStyle* QSyntaxStyle::defaultStyle()
-{
+QSyntaxStyle* QSyntaxStyle::defaultStyle() {
     static QSyntaxStyle style;
 
-    if (!style.isLoaded())
-    {
+    if (!style.isLoaded()) {
         Q_INIT_RESOURCE(qcodeeditor_resources);
         QFile fl(":/default_style.xml");
 
-        if (!fl.open(QIODevice::ReadOnly))
-        {
+        if (!fl.open(QIODevice::ReadOnly)) {
             return &style;
         }
 
-        if (!style.load(fl.readAll()))
-        {
+        if (!style.load(fl.readAll())) {
             qDebug() << "Can't load default style.";
         }
     }
