@@ -14,22 +14,19 @@ class QSyntaxStyle;
  * @brief Class, that describes Glsl code
  * highlighter.
  */
-class QGLSLHighlighter : public QStyleSyntaxHighlighter
-{
-    Q_OBJECT
+class QGLSLHighlighter : public QStyleSyntaxHighlighter {
+    //Q_OBJECT
 public:
-
     /**
      * @brief Constructor.
      * @param document Pointer to document.
      */
-    explicit QGLSLHighlighter(QTextDocument* document=nullptr);
+    explicit QGLSLHighlighter(QTextDocument* document = nullptr);
 
 protected:
     void highlightBlock(const QString& text) override;
 
 private:
-
     QVector<QHighlightRule> m_highlightRules;
 
     QRegularExpression m_includePattern;
@@ -39,4 +36,3 @@ private:
     QRegularExpression m_commentStartPattern;
     QRegularExpression m_commentEndPattern;
 };
-

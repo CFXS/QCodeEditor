@@ -15,22 +15,19 @@ class QSyntaxStyle;
  * @brief Class, that describes Glsl code
  * highlighter.
  */
-class QPythonHighlighter : public QStyleSyntaxHighlighter
-{
-    Q_OBJECT
+class QPythonHighlighter : public QStyleSyntaxHighlighter {
+    //Q_OBJECT
 public:
-
     /**
      * @brief Constructor.
      * @param document Pointer to document.
      */
-    explicit QPythonHighlighter(QTextDocument* document=nullptr);
+    explicit QPythonHighlighter(QTextDocument* document = nullptr);
 
 protected:
     void highlightBlock(const QString& text) override;
 
 private:
-
     QVector<QHighlightRule> m_highlightRules;
     QVector<QHighlightBlockRule> m_highlightBlockRules;
 
@@ -38,4 +35,3 @@ private:
     QRegularExpression m_functionPattern;
     QRegularExpression m_defTypePattern;
 };
-

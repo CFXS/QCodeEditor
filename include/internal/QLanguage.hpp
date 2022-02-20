@@ -11,17 +11,15 @@ class QIODevice;
  * Class, that describes object for parsing
  * language file.
  */
-class QLanguage : public QObject
-{
-    Q_OBJECT
+class QLanguage : public QObject {
+    //Q_OBJECT
 
 public:
-
     /**
      * @brief Constructor.
      * @param parent Pointer to parent QObject.
      */
-    explicit QLanguage(QIODevice* device=nullptr, QObject* parent=nullptr);
+    explicit QLanguage(QIODevice* device = nullptr, QObject* parent = nullptr);
 
     /**
      * @brief Method for parsing.
@@ -49,13 +47,7 @@ public:
     bool isLoaded() const;
 
 private:
-
     bool m_loaded;
 
-    QMap<
-        QString,
-        QStringList
-    > m_list;
-
+    QMap<QString, QStringList> m_list;
 };
-
