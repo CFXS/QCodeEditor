@@ -10,17 +10,15 @@
  * @brief Class, that describes Qt style
  * parser for QCodeEditor.
  */
-class QSyntaxStyle : public QObject
-{
-    Q_OBJECT
+class QSyntaxStyle : public QObject {
+    //Q_OBJECT
 
 public:
-
     /**
      * @brief Constructor.
      * @param parent Pointer to parent QObject
      */
-    explicit QSyntaxStyle(QObject* parent=nullptr);
+    explicit QSyntaxStyle(QObject* parent = nullptr);
 
     /**
      * @brief Method for loading and parsing
@@ -57,14 +55,9 @@ public:
     static QSyntaxStyle* defaultStyle();
 
 private:
-
     QString m_name;
 
-    QMap<
-        QString,
-        QTextCharFormat
-    > m_data;
+    QMap<QString, QTextCharFormat> m_data;
 
     bool m_loaded;
 };
-

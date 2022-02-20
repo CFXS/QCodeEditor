@@ -12,16 +12,15 @@ class QFramedTextAttribute;
 /**
  * @brief Class, that describes code editor.
  */
-class QCodeEditor : public QTextEdit
-{
-    Q_OBJECT
+class QCodeEditor : public QTextEdit {
+    //Q_OBJECT
 
 public:
     /**
      * @brief Constructor.
      * @param widget Pointer to parent widget.
      */
-    explicit QCodeEditor(QWidget* widget=nullptr);
+    explicit QCodeEditor(QWidget* widget = nullptr);
 
     // Disable copying
     QCodeEditor(const QCodeEditor&) = delete;
@@ -183,10 +182,9 @@ protected:
      * It's required for setting this widget to set
      * completer.
      */
-    void focusInEvent(QFocusEvent *e) override;
+    void focusInEvent(QFocusEvent* e) override;
 
 private:
-
     /**
      * @brief Method for initializing document
      * layout handlers.
@@ -222,7 +220,7 @@ private:
      * @param e Pointer to key event.
      * @return Shall event be dropped.
      */
-    bool proceedCompleterBegin(QKeyEvent *e);
+    bool proceedCompleterBegin(QKeyEvent* e);
     void proceedCompleterEnd(QKeyEvent* e);
 
     /**
@@ -270,4 +268,3 @@ private:
     bool m_replaceTab;
     QString m_tabReplace;
 };
-

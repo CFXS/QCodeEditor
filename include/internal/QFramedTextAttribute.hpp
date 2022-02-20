@@ -1,7 +1,7 @@
 #pragma once
 
 // Qt
-#include <QObject> // Required for inheritance
+#include <QObject>              // Required for inheritance
 #include <QTextObjectInterface> // Required for inheritance
 
 class QSyntaxStyle;
@@ -10,18 +10,12 @@ class QSyntaxStyle;
  * @brief Class, that describes
  * attribute for making text frame.
  */
-class QFramedTextAttribute : public QObject,
-                             public QTextObjectInterface
-{
-    Q_OBJECT
+class QFramedTextAttribute : public QObject, public QTextObjectInterface {
+    //Q_OBJECT
     Q_INTERFACES(QTextObjectInterface)
 
 public:
-
-    enum Property
-    {
-        FramedString = 1
-    };
+    enum Property { FramedString = 1 };
 
     /**
      * @brief Static method for getting framed text
@@ -33,29 +27,23 @@ public:
      * @brief Constructor.
      * @param parent Pointer to parent QObject.
      */
-    explicit QFramedTextAttribute(QObject* parent=nullptr);
+    explicit QFramedTextAttribute(QObject *parent = nullptr);
 
     // Disable copying
-    QFramedTextAttribute(const QFramedTextAttribute&) = delete;
-    QFramedTextAttribute& operator=(const QFramedTextAttribute&) = delete;
+    QFramedTextAttribute(const QFramedTextAttribute &) = delete;
+    QFramedTextAttribute &operator=(const QFramedTextAttribute &) = delete;
 
     /**
      * @brief Method for getting custom element (frame)
      * size. Though frame symbol has no size, this
      * method returns {0, 0}
      */
-    QSizeF intrinsicSize(QTextDocument *doc,
-                         int posInDocument,
-                         const QTextFormat &format) override;
+    QSizeF intrinsicSize(QTextDocument *doc, int posInDocument, const QTextFormat &format) override;
 
     /**
      * @brief Method for drawing frame.
      */
-    void drawObject(QPainter *painter,
-                    const QRectF &rect,
-                    QTextDocument *doc,
-                    int posInDocument,
-                    const QTextFormat &format) override;
+    void drawObject(QPainter *painter, const QRectF &rect, QTextDocument *doc, int posInDocument, const QTextFormat &format) override;
 
     /**
      * @brief Method for creating frame in cursor
@@ -74,15 +62,13 @@ public:
      * @brief Method for setting syntax style
      * for rendering.
      */
-    void setSyntaxStyle(QSyntaxStyle* style);
+    void setSyntaxStyle(QSyntaxStyle *style);
 
     /**
      * @brief Method for getting syntax style.
      */
-    QSyntaxStyle* syntaxStyle() const;
+    QSyntaxStyle *syntaxStyle() const;
 
 private:
-
-    QSyntaxStyle* m_style;
+    QSyntaxStyle *m_style;
 };
-
