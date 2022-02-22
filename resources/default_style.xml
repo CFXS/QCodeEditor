@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <style-scheme version="1.0" name="Default">
-    <style name="Text" foreground="#ffffff" background="#1C1C1C" />
+    <style name="Text" foreground="#DCDCDC" background="#1B1B1B" />
     <style name="Link" foreground="#0000ff" />
     <style name="Selection" background="#1d7ec9" />
     <style name="LineNumber" foreground="#5c5c5c" />
@@ -8,22 +8,25 @@
     <style name="CurrentLineNumber" foreground="#c4c4c4" />
     <style name="SearchResult" background="#ffef0b" />
     <style name="SearchScope" background="#2d5c76" />
-    <style name="Parentheses" background="#3A3A3A" />
+    <style name="Namespace" background="#4EC9B0" />
+    <style name="Parentheses" background="#4A4A4A" />
     <style name="ParenthesesMismatch" foreground="#ff0000" />
     <style name="AutoComplete" foreground="#000080" background="#c0c0ff" />
     <style name="Occurrences" background="#b4b4b4" />
     <style name="Occurrences.Unused" underlineColor="#808000" />
     <style name="Occurrences.Rename" background="#ff6464" />
-    <style name="Number" foreground="#B5DEA8" />
+    <style name="Variable" foreground="#9CDCFE" />
+    <style name="Number" foreground="#B5CEA8" />
     <style name="String" foreground="#CE9178" />
-    <style name="Type" foreground="#800080" />
+    <style name="Type" foreground="#4EC9B0" />
     <style name="Local" foreground="#092e64" />
     <style name="Global" foreground="#ce5c00" />
     <style name="Field" foreground="#800000" />
     <style name="Static" foreground="#800080" />
     <style name="VirtualMethod" foreground="#00677c" />
-    <style name="Function" foreground="#DCDC88" />
+    <style name="Function" foreground="#DCDCAA" />
     <style name="Keyword" foreground="#569CD6" />
+    <style name="Control" foreground="#C586C0" />
     <style name="PrimitiveType" foreground="#569CD6" />
     <style name="Operator" />
     <style name="Overloaded Operator" />
