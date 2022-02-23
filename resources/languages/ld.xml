@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <section name="Function">
+        <name>ORIGIN</name>
+        <name>LENGTH</name>
+    </section>
+    <section name="Keyword">
+        <name>KEEP</name>
+        <name>ALIGN</name>
+        <name>AT</name>
+        <name>ADDR</name>
+        <name>SIZEOF</name>
+        <name>SORT</name>
+        <name>PROVIDE</name>
+        <name>PROVIDE_HIDDEN</name>
+        <name>ABSOLUTE</name>
+        <name>LOADADDR</name>
+        <name>FLAGS</name>
+    </section>
+    <section name="Control">
+        <name>MEMORY</name>
+        <name>ENTRY</name>
+        <name>SECTIONS</name>
+        <name>INPUT</name>
+    </section>
+    <section name="Type">
+        <name>BYTE</name>
+        <name>SHORT</name>
+        <name>LONG</name>
+        <name>QUAD</name>
+        <name>SQUAD</name>
+    </section>
+</root>

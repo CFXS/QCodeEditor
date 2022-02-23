@@ -76,6 +76,10 @@ void QCodeEditor::setHighlighter(QStyleSyntaxHighlighter* highlighter) {
     }
 }
 
+QStyleSyntaxHighlighter* QCodeEditor::highlighter() {
+    return m_highlighter;
+}
+
 void QCodeEditor::setSyntaxStyle(QSyntaxStyle* style) {
     m_syntaxStyle = style;
 
@@ -113,6 +117,7 @@ void QCodeEditor::updateStyle() {
 }
 
 void QCodeEditor::onSelectionChanged() {
+    /*
     auto selected = textCursor().selectedText();
 
     auto cursor = textCursor();
@@ -136,6 +141,7 @@ void QCodeEditor::onSelectionChanged() {
 
         setTextCursor(backup);
     }
+    */
 }
 
 void QCodeEditor::resizeEvent(QResizeEvent* e) {

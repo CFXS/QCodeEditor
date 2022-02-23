@@ -8,7 +8,7 @@
     <style name="CurrentLineNumber" foreground="#c4c4c4" />
     <style name="SearchResult" background="#ffef0b" />
     <style name="SearchScope" background="#2d5c76" />
-    <style name="Namespace" background="#4EC9B0" />
+    <style name="Namespace" foreground="#4EC9B0" />
     <style name="Parentheses" background="#4A4A4A" />
     <style name="ParenthesesMismatch" foreground="#ff0000" />
     <style name="AutoComplete" foreground="#000080" background="#c0c0ff" />
@@ -18,6 +18,7 @@
     <style name="Variable" foreground="#9CDCFE" />
     <style name="Number" foreground="#B5CEA8" />
     <style name="String" foreground="#CE9178" />
+    <style name="Escape" foreground="#D7BA7D" />
     <style name="Type" foreground="#4EC9B0" />
     <style name="Local" foreground="#092e64" />
     <style name="Global" foreground="#ce5c00" />
@@ -31,7 +32,10 @@
     <style name="Operator" />
     <style name="Overloaded Operator" />
     <style name="Preprocessor" foreground="#C586C0" />
+    <style name="Access" foreground="#FF9900" />
+    <style name="Modifier" foreground="#FFFF00" />
     <style name="Label" foreground="#800000" />
+    <style name="Definition" foreground="#569cd6" />
     <style name="Comment" foreground="#6A9955" />
     <style name="Doxygen.Comment" foreground="#000080" />
     <style name="Doxygen.Tag" foreground="#0000ff" />

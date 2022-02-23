@@ -40,6 +40,12 @@ public:
     void setHighlighter(QStyleSyntaxHighlighter* highlighter);
 
     /**
+     * @brief Method for getting highlighter.
+     * @return Pointer to syntax highlighter.
+     */
+    QStyleSyntaxHighlighter* highlighter();
+
+    /**
      * @brief Method for setting syntax sty.e.
      * @param style Pointer to syntax style.
      */

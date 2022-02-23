@@ -5,5 +5,7 @@
         <file>languages/cpp.xml</file>
         <file>languages/lua.xml</file>
         <file>languages/python.xml</file>
+        <file>languages/ld.xml</file>
+        <file>languages/cmake.xml</file>
     </qresource>
 </RCC>

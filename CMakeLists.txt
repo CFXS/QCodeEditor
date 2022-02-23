@@ -54,6 +54,8 @@ set(SOURCE_FILES
     src/internal/QCodeEditor.cpp
     src/internal/QLineNumberArea.cpp
     src/internal/QCXXHighlighter.cpp
+    src/internal/QCMakeHighlighter.cpp
+    src/internal/QLDHighlighter.cpp
     src/internal/QSyntaxStyle.cpp
     src/internal/QStyleSyntaxHighlighter.cpp
     src/internal/QGLSLCompleter.cpp
