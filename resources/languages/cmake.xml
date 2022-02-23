@@ -70,5 +70,11 @@
         <name>(?i)asm</name>
         <name>(?i)c</name>
         <name>(?i)cxx</name>
+        <name>(?i)suffix</name>
+        <name>(?i)properties</name>
+        <name>(?i)public</name>
+        <name>(?i)private</name>
+        <name>(?i)interface</name>
+        <name>(?i)system</name>
     </section>
 </root>
