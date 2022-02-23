@@ -27,7 +27,7 @@ protected:
     void highlightBlock(const QString& text) override;
 
 private:
-    QVector<QHighlightRule> m_highlightRules;
+    QVector<QHighlightRule> m_HighlightRules;
 
     const QString m_CommentStartRegex        = QStringLiteral(R"(/\*)");
     const QString m_CommentEndRegex          = QStringLiteral(R"(\*/)");

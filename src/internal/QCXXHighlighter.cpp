@@ -6,7 +6,7 @@
 // Qt
 #include <QFile>
 
-QCXXHighlighter::QCXXHighlighter(QTextDocument* document) : QStyleSyntaxHighlighter(document), m_highlightRules() {
+QCXXHighlighter::QCXXHighlighter(QTextDocument* document) : QStyleSyntaxHighlighter(document), m_HighlightRules() {
     Q_INIT_RESOURCE(qcodeeditor_resources);
     QFile fl(":/languages/cpp.xml");
 
@@ -21,51 +21,54 @@ QCXXHighlighter::QCXXHighlighter(QTextDocument* document) : QStyleSyntaxHighligh
     }
 
     // func ptr
-    m_highlightRules.append({QRegularExpression(R"((?:\()(\*.*(?:\)))(?:\(.*\)))"), "Variable"});
+    m_HighlightRules.append({QRegularExpression(R"((?:\()(\*.*(?:\)))(?:\(.*\)))"), "Variable"});
 
     // control content
-    //m_highlightRules.append({QRegularExpression(R"(for\s*?\(.*\))"), "Variable"});
-    //m_highlightRules.append({QRegularExpression(R"(if\s*?\(.*\))"), "Variable"});
-    //m_highlightRules.append({QRegularExpression(R"(while\s*?\(.*\))"), "Variable"});
-    //m_highlightRules.append({QRegularExpression(R"(switch\s*?\(.*\))"), "Variable"});
+    //m_HighlightRules.append({QRegularExpression(R"(for\s*?\(.*\))"), "Variable"});
+    //m_HighlightRules.append({QRegularExpression(R"(if\s*?\(.*\))"), "Variable"});
+    //m_HighlightRules.append({QRegularExpression(R"(while\s*?\(.*\))"), "Variable"});
+    //m_HighlightRules.append({QRegularExpression(R"(switch\s*?\(.*\))"), "Variable"});
 
     // std
-    m_highlightRules.append({QRegularExpression(R"((std::.*?[<\(\s]))"), "Type"});
+    m_HighlightRules.append({QRegularExpression(R"((std::.*?[<\(\s]))"), "Type"});
 
     // Color reset
-    m_highlightRules.append({QRegularExpression(R"([&;><\+\-\/\%:=\*\[\]\{\},])"), "Text"});
+    m_HighlightRules.append({QRegularExpression(R"([&;><\+\-\/\%:=\*\[\]\{\},])"), "Text"});
 
     auto keys = language.keys();
     for (auto&& key : keys) {
         auto names = language.names(key);
         for (auto&& name : names) {
-            m_highlightRules.append({QRegularExpression(QString(R"(\b%1\b)").arg(name)), key});
+            m_HighlightRules.append({QRegularExpression(QString(R"(\b%1\b)").arg(name)), key});
         }
     }
 
     // Include
-    m_highlightRules.append({QRegularExpression(R"(#include\s*?[<"].*?[>"])"), "String"});
+    m_HighlightRules.append({QRegularExpression(R"(#include\s*?[<"].*?[>"])"), "String"});
 
     // Define
-    m_highlightRules.append({QRegularExpression(R"(#[a-zA-Z_]+)"), "Preprocessor"});
+    m_HighlightRules.append({QRegularExpression(R"(#[a-zA-Z_]+)"), "Preprocessor"});
 
     // Numbers
-    m_highlightRules.append(
+    m_HighlightRules.append(
         {QRegularExpression(
              R"((?<=\b|\s|^)(?i)(?:(?:(?:(?:(?:\d+(?:'\d+)*)?\.(?:\d+(?:'\d+)*)(?:e[+-]?(?:\d+(?:'\d+)*))?)|(?:(?:\d+(?:'\d+)*)\.(?:e[+-]?(?:\d+(?:'\d+)*))?)|(?:(?:\d+(?:'\d+)*)(?:e[+-]?(?:\d+(?:'\d+)*)))|(?:0x(?:[0-9a-f]+(?:'[0-9a-f]+)*)?\.(?:[0-9a-f]+(?:'[0-9a-f]+)*)(?:p[+-]?(?:\d+(?:'\d+)*)))|(?:0x(?:[0-9a-f]+(?:'[0-9a-f]+)*)\.?(?:p[+-]?(?:\d+(?:'\d+)*))))[lf]?)|(?:(?:(?:[1-9]\d*(?:'\d+)*)|(?:0[0-7]*(?:'[0-7]+)*)|(?:0x[0-9a-f]+(?:'[0-9a-f]+)*)|(?:0b[01]+(?:'[01]+)*))(?:u?l{0,2}|l{0,2}u?)))(?=\b|\s|$))"),
          "Number"});
 
     // Chars
-    m_highlightRules.append({QRegularExpression(R"(('(?:[^'\n].*?)?(?:.)?'))"), "String"});
+    m_HighlightRules.append({QRegularExpression(R"(('(?:[^'\n].*?)?(?:.)?'))"), "String"});
 
     // Strings
-    m_highlightRules.append({QRegularExpression(R"(\"(\\.|[^"\\])*\")"), "String"});
+    m_HighlightRules.append({QRegularExpression(R"(\"(\\.|[^"\\])*\")"), "String"});
+
+    // printf
+    m_HighlightRules.append({QRegularExpression(R"((%(?:[\*\-\+\d\x]*(?:\.[\d\x]+)?)?(?:d|f|s|x|l|g|X|llu|lu|u)))"), "Format"});
 
     // Escapes
-    m_highlightRules.append({QRegularExpression(R"((\\))"), "Escape"});
+    m_HighlightRules.append({QRegularExpression(R"((\\))"), "Escape"});
 
     // Single line
-    m_highlightRules.append({QRegularExpression(R"(//[^\n]*)"), "Comment"});
+    m_HighlightRules.append({QRegularExpression(R"(//[^\n]*)"), "Comment"});
 }
 
 void QCXXHighlighter::highlightBlock(const QString& text) {
@@ -120,7 +123,7 @@ void QCXXHighlighter::highlightBlock(const QString& text) {
         }
     }
 
-    for (auto& rule : m_highlightRules) {
+    for (auto& rule : m_HighlightRules) {
         auto matchIterator = rule.pattern.globalMatch(text);
 
         while (matchIterator.hasNext()) {

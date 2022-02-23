@@ -6,7 +6,7 @@
 // Qt
 #include <QFile>
 
-QCMakeHighlighter::QCMakeHighlighter(QTextDocument* document) : QStyleSyntaxHighlighter(document), m_highlightRules() {
+QCMakeHighlighter::QCMakeHighlighter(QTextDocument* document) : QStyleSyntaxHighlighter(document), m_HighlightRules() {
     Q_INIT_RESOURCE(qcodeeditor_resources);
     QFile fl(":/languages/cmake.xml");
 
@@ -24,33 +24,33 @@ QCMakeHighlighter::QCMakeHighlighter(QTextDocument* document) : QStyleSyntaxHigh
     for (auto&& key : keys) {
         auto names = language.names(key);
         for (auto&& name : names) {
-            m_highlightRules.append({QRegularExpression(QString(R"(\b%1\b)").arg(name)), key});
+            m_HighlightRules.append({QRegularExpression(QString(R"(\b%1\b)").arg(name)), key});
         }
     }
 
     // Numbers
-    m_highlightRules.append(
+    m_HighlightRules.append(
         {QRegularExpression(
              R"((?<=\b|\s|^)(?i)(?:(?:(?:(?:(?:\d+(?:'\d+)*)?\.(?:\d+(?:'\d+)*)(?:e[+-]?(?:\d+(?:'\d+)*))?)|(?:(?:\d+(?:'\d+)*)\.(?:e[+-]?(?:\d+(?:'\d+)*))?)|(?:(?:\d+(?:'\d+)*)(?:e[+-]?(?:\d+(?:'\d+)*)))|(?:0x(?:[0-9a-f]+(?:'[0-9a-f]+)*)?\.(?:[0-9a-f]+(?:'[0-9a-f]+)*)(?:p[+-]?(?:\d+(?:'\d+)*)))|(?:0x(?:[0-9a-f]+(?:'[0-9a-f]+)*)\.?(?:p[+-]?(?:\d+(?:'\d+)*))))[lf]?)|(?:(?:(?:[1-9]\d*(?:'\d+)*)|(?:0[0-7]*(?:'[0-7]+)*)|(?:0x[0-9a-f]+(?:'[0-9a-f]+)*)|(?:0b[01]+(?:'[01]+)*))(?:u?l{0,2}|l{0,2}u?)))(?=\b|\s|$))"),
          "Number"});
 
     // Define
-    m_highlightRules.append({QRegularExpression(R"(#[a-zA-Z_]+)"), "Preprocessor"});
+    m_HighlightRules.append({QRegularExpression(R"(#[a-zA-Z_]+)"), "Preprocessor"});
 
     // Chars
-    m_highlightRules.append({QRegularExpression(R"(('(?:[^'\n].*?)?(?:.)?'))"), "String"});
+    m_HighlightRules.append({QRegularExpression(R"(('(?:[^'\n].*?)?(?:.)?'))"), "String"});
 
     // Strings
-    m_highlightRules.append({QRegularExpression(R"(\"(\\.|[^"\\])*\")"), "String"});
+    m_HighlightRules.append({QRegularExpression(R"(\"(\\.|[^"\\])*\")"), "String"});
 
     // Escapes
-    m_highlightRules.append({QRegularExpression(R"((\\))"), "Escape"});
+    m_HighlightRules.append({QRegularExpression(R"((\\))"), "Escape"});
 
     // Inserts
-    m_highlightRules.append({QRegularExpression(R"((\${.*?}))"), "Access"});
+    m_HighlightRules.append({QRegularExpression(R"((\${.*?}))"), "Access"});
 
     // Single line
-    m_highlightRules.append({QRegularExpression(R"(#[^\n]*)"), "Comment"});
+    m_HighlightRules.append({QRegularExpression(R"(#[^\n]*)"), "Comment"});
 }
 
 void QCMakeHighlighter::highlightBlock(const QString& text) {
@@ -133,7 +133,7 @@ void QCMakeHighlighter::highlightBlock(const QString& text) {
         }
     }
 
-    for (auto& rule : m_highlightRules) {
+    for (auto& rule : m_HighlightRules) {
         auto matchIterator = rule.pattern.globalMatch(text);
 
         while (matchIterator.hasNext()) {

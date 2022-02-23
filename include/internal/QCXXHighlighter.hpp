@@ -27,7 +27,7 @@ protected:
     void highlightBlock(const QString& text) override;
 
 private:
-    QVector<QHighlightRule> m_highlightRules;
+    QVector<QHighlightRule> m_HighlightRules;
 
     const QString m_FunctionRegex = QStringLiteral(
         R"(\b([_a-zA-Z][_a-zA-Z0-9]*\s+)?((?:[_a-zA-Z][_a-zA-Z0-9]*\s*::\s*)*([_a-zA-Z][_a-zA-Z0-9]*(?:<(.*?)>)?))(?=\s*\())");

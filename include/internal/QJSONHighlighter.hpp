@@ -24,6 +24,6 @@ protected:
     void highlightBlock(const QString& text) override;
 
 private:
-    QVector<QHighlightRule> m_highlightRules;
+    QVector<QHighlightRule> m_HighlightRules;
     QRegularExpression m_keyRegex;
 };

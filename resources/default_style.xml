@@ -18,6 +18,7 @@
     <style name="Variable" foreground="#9CDCFE" />
     <style name="Number" foreground="#B5CEA8" />
     <style name="String" foreground="#CE9178" />
+    <style name="Format" foreground="#D46666" />
     <style name="Escape" foreground="#D7BA7D" />
     <style name="Type" foreground="#4EC9B0" />
     <style name="Local" foreground="#092e64" />
