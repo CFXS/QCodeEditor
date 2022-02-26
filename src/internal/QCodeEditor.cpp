@@ -22,7 +22,7 @@
 static QVector<QPair<QString, QString>> parentheses = {{"(", ")"}, {"{", "}"}, {"[", "]"}, {"\"", "\""}, {"'", "'"}};
 
 QCodeEditor::QCodeEditor(QWidget* widget) :
-    QTextEdit(widget),
+    QPlainTextEdit(widget),
     m_highlighter(nullptr),
     m_syntaxStyle(nullptr),
     m_lineNumberArea(new QLineNumberArea(this)),
@@ -58,9 +58,9 @@ void QCodeEditor::performConnections() {
         m_lineNumberArea->update();
     });
 
-    connect(this, &QTextEdit::cursorPositionChanged, this, &QCodeEditor::updateExtraSelection);
+    connect(this, &QPlainTextEdit::cursorPositionChanged, this, &QCodeEditor::updateExtraSelection);
 
-    connect(this, &QTextEdit::selectionChanged, this, &QCodeEditor::onSelectionChanged);
+    connect(this, &QPlainTextEdit::selectionChanged, this, &QCodeEditor::onSelectionChanged);
 }
 
 void QCodeEditor::setHighlighter(QStyleSyntaxHighlighter* highlighter) {
@@ -145,7 +145,7 @@ void QCodeEditor::onSelectionChanged() {
 }
 
 void QCodeEditor::resizeEvent(QResizeEvent* e) {
-    QTextEdit::resizeEvent(e);
+    QPlainTextEdit::resizeEvent(e);
 
     updateLineGeometry();
 }
@@ -231,7 +231,7 @@ void QCodeEditor::highlightParenthesis(QList<QTextEdit::ExtraSelection>& extraSe
 
         // Found
         if (counter == 0) {
-            ExtraSelection selection{};
+            QTextEdit::ExtraSelection selection{};
 
             auto directionEnum = direction < 0 ? QTextCursor::MoveOperation::Left : QTextCursor::MoveOperation::Right;
 
@@ -271,7 +271,7 @@ void QCodeEditor::highlightCurrentLine(QList<QTextEdit::ExtraSelection>& extraSe
 
 void QCodeEditor::paintEvent(QPaintEvent* e) {
     updateLineNumberArea(e->rect());
-    QTextEdit::paintEvent(e);
+    QPlainTextEdit::paintEvent(e);
 }
 
 int QCodeEditor::getFirstVisibleBlock() {
@@ -414,7 +414,7 @@ void QCodeEditor::keyPressEvent(QKeyEvent* e) {
             return;
         }
 
-        QTextEdit::keyPressEvent(e);
+        QPlainTextEdit::keyPressEvent(e);
 
         if (m_autoIndentation && (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)) {
             if (m_replaceTab)
@@ -506,7 +506,7 @@ void QCodeEditor::focusInEvent(QFocusEvent* e) {
         m_completer->setWidget(this);
     }
 
-    QTextEdit::focusInEvent(e);
+    QPlainTextEdit::focusInEvent(e);
 }
 
 void QCodeEditor::insertCompletion(QString s) {
